@@ -1,0 +1,46 @@
+
+<div fxLayoutAlign="center center" fxFlexFill class="main-div" >
+  <mat-card fxFlex="25">
+    <mat-toolbar class="login-banner">Login</mat-toolbar>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+      <mat-form-field>
+        <input matInput placeholder="Username" formControlName="username">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <button mat-raised-button type="submit">Login</button>
+        <div style="width:200px;overflow:auto">
+          <pre></pre>
+        </div>
+      <button mat-raised-button ="button" (click)="openWithTemplate(ref)" type="button" color="primary" class="model is-active">
+        Sign Up
+      </button>
+
+      <ng-template #ref>
+        <div class="reg-div">
+          <mat-card fxFlex="200">
+            <mat-toolbar class="login-banner">Sign Up</mat-toolbar>
+            <form [formGroup]="form" (ngSubmit)="onRegister(form.value)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+              <mat-form-field>
+                <input matInput placeholder="Username" formControlName="username">
+              </mat-form-field>
+
+              <mat-form-field>
+                <input matInput type="password" placeholder="Password" formControlName="password">
+              </mat-form-field>
+              <button mat-raised-button type="submit">Register User</button>
+              <div style="width:300px;overflow:auto">
+                <pre></pre>
+              </div>
+            </form>
+          </mat-card>
+        </div>
+      </ng-template>
+
+<!--      <button mat-raised-button ="button" routerLink="/register"  color="primary">Sign Up</button>-->
+    </form>
+
+  </mat-card>
+</div>

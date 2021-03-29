@@ -2,7 +2,8 @@
 <div fxLayoutAlign="center center" fxFlexFill class="main-div" >
   <mat-card fxFlex="25">
     <mat-toolbar class="login-banner">Login</mat-toolbar>
-    <form [formGroup]="form" (ngSubmit)="onSubmit(form.value)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+    <form [formGroup]="loginform" (ngSubmit)="onSubmit(loginform.value)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+
       <mat-form-field>
         <input matInput placeholder="Username" formControlName="username">
       </mat-form-field>
@@ -10,7 +11,7 @@
       <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password">
       </mat-form-field>
-      <button mat-raised-button type="submit">Login</button>
+      <button mat-raised-button type="submit" [disabled]="!loginform.valid">Login</button>
         <div style="width:200px;overflow:auto">
           <pre></pre>
         </div>
@@ -22,15 +23,24 @@
         <div class="reg-div">
           <mat-card fxFlex="200">
             <mat-toolbar class="login-banner">Sign Up</mat-toolbar>
-            <form [formGroup]="form" (ngSubmit)="onRegister(form.value)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+            <form [formGroup]="registerform" (ngSubmit)="onRegister(registerform.value)" fxLayoutAlign="stretch" fxLayout="column" class="login-form">
+
+              <div *ngIf="registerform.get('username').errors"  class="error">
+                Login is invalid!
+              </div>
+
               <mat-form-field>
                 <input matInput placeholder="Username" formControlName="username">
               </mat-form-field>
 
+              <div *ngIf="registerform.get('password').errors"  class="error">
+                Password length must be greater than {{passlength}} characters!
+              </div>
+
               <mat-form-field>
                 <input matInput type="password" placeholder="Password" formControlName="password">
               </mat-form-field>
-              <button mat-raised-button type="submit">Register User</button>
+              <button mat-raised-button type="submit" [disabled]="!registerform.valid">Register User</button>
               <div style="width:300px;overflow:auto">
                 <pre></pre>
               </div>
@@ -38,8 +48,6 @@
           </mat-card>
         </div>
       </ng-template>
-
-<!--      <button mat-raised-button ="button" routerLink="/register"  color="primary">Sign Up</button>-->
     </form>
 
   </mat-card>

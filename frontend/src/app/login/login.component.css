@@ -29,5 +29,9 @@
   pointer-events: all !important;
 }
 
+.error {
+  color: #d93a3e;
+}
+
 
 

@@ -15,6 +15,10 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { HomepageComponent } from './homepage/homepage.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import {TokenInterceptor} from './auth/token.interceptor';
+import {AuthService} from './auth/auth.service';
+import {UserService} from './user.service';
+import {AuthGuardService} from './auth/auth.guard';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -35,15 +39,20 @@ import {TokenInterceptor} from './auth/token.interceptor';
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
+
+
   ],
  providers: [
+   AuthService,
+   UserService,
+   AuthGuardService,
    {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
     multi: true
   },
-   { provide: HTTP_INTERCEPTORS, useClass: LoginComponent, multi: true }
   ],
   bootstrap: [AppComponent]
 })

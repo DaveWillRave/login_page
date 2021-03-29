@@ -1,12 +1,8 @@
-import {Component, ElementRef, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { UserService } from '../user.service';
 import {FormGroup, FormControl, Validators } from '@angular/forms';
-import {FocusMonitor, FocusOrigin} from '@angular/cdk/a11y';
-import {Observable} from 'rxjs';
-import {MatInput} from '@angular/material/input';
-import {map} from 'rxjs/operators';
-import {Overlay, OverlayConfig, OverlayModule} from '@angular/cdk/overlay';
+import {Overlay, OverlayConfig} from '@angular/cdk/overlay';
 import {TemplatePortal} from '@angular/cdk/portal';
 
 @Component({
@@ -15,10 +11,10 @@ import {TemplatePortal} from '@angular/cdk/portal';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  personData;
-  id;
-  isOpen: boolean;
-  form: FormGroup;
+
+  loginform: FormGroup;
+  registerform: FormGroup;
+  passlength = 6;
 
 
   constructor(
@@ -28,15 +24,6 @@ export class LoginComponent implements OnInit {
     private overlay: Overlay, private viewContainerRef: ViewContainerRef
   ) {
   }
-
-
-  // openWithTemplate(reg: TemplateRef<any>) {
-  //   const configs = new OverlayConfig({
-  //     hasBackdrop: true,
-  //     panelClass: ['modal', 'is-active'],
-  //     backdropClass: 'modal-background'
-  //   });
-  // }
 
   openWithTemplate(ref: any): void {
     const configs = new OverlayConfig({
@@ -49,10 +36,21 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.form = new FormGroup({
+    this.loginform = new FormGroup({
       // id: new FormControl('', Validators.required),
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),
+    });
+
+    this.registerform = new FormGroup({
+      username: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[\\w\\-\\s\\/]+'),
+      ])),
+      password: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(this.passlength),
+      ])),
     });
   }
 
@@ -77,12 +75,14 @@ export class LoginComponent implements OnInit {
   }
 
   onRegister(user): void {
-    this.userService.userRegister(user)
-      // lambda expression used to map the boolean response to loginStatus
-      .subscribe(() => {
-        // will return [object Object] instead of boolean of this is not done
-        console.log(`Register: Success!`);
-        location.reload();
-      });
+    if (confirm(`Are you sure you want to register this user to the database?`)) {
+      this.userService.userRegister(user)
+        .subscribe(() => {
+          console.log(`Register: Success!`);
+          location.reload();
+        });
+    } else {
+      console.log(`User was not registered to the database.`);
+    }
   }
 }

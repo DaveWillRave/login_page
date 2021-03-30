@@ -18,8 +18,8 @@ An Angular, Flask API and MongoDB application for logging in and registering use
 ## Setup
 
 + Angular Development server - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Use the command 'npm install' to install any requirements.
-+ Flask API - To run the flask api install all the requirments using 'pip install -r requirements.txt' 
-Then simply run the command 'python -m flask run'
++ Flask API - To run the flask api install all the requirments using `pip install -r requirements.txt`
+Then simply run the command `python -m flask run`
 
 ## Relevant Frontend directories
 "login_page/frontend/src/app/" contains all the frontend code and with "/auth" containing the token interceptor and auth guard services.

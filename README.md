@@ -1,10 +1,5 @@
-# Frontend
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5. Angular Materials is used for designing login and homepage components along with Angular CDK library for additional features.
-
-# Backend
-
-Flask API version 1.1.2 is running on Python 3.8.6. MongoEngine is used by the Flask Api. MongoDB stores user login credentials, with users identified by their username and password. Bcrypt 3.2.0 library is used for encrypting user passwords before sending them into the database. Usernames are unique entries. Werkzeug version 0.16.1 is needed for compatibility with CORS package.
+# Login Page
+An Angular, Flask API and MongoDB application for logging in and registering users.
 
 ## Feature list
 
@@ -15,6 +10,17 @@ Flask API version 1.1.2 is running on Python 3.8.6. MongoEngine is used by the F
 + Interceptor - Adds HttpOptions to http requests. 
 + Authguard - Restricts users accessing directories without login credentials.
 
+## Requirements
++ Frontend - This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5. Angular Materials is used for designing login and homepage components along with Angular CDK library for additional features.
+
++ Backend - Flask API version 1.1.2 is running on Python 3.8.6. MongoEngine is used by the Flask Api. MongoDB stores user login credentials, with users identified by their username and password. Bcrypt 3.2.0 library is used for encrypting user passwords before sending them into the database. Usernames are unique entries. Werkzeug version 0.16.1 is needed for compatibility with CORS package.
+
+## Setup
+
++ Angular Development server - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Use the command 'npm install' to install any requirements.
++ Flask API - To run the flask api install all the requirments using 'pip install -r requirements.txt' 
+Then simply run the command 'python -m flask run'
+
 ## Relevant Frontend directories
 "login_page/frontend/src/app/" contains all the frontend code and with "/auth" containing the token interceptor and auth guard services.
 "user.services.ts" handles all the http requests and the get token request.
@@ -22,26 +28,6 @@ Flask API version 1.1.2 is running on Python 3.8.6. MongoEngine is used by the F
 ## Relevant Backend directories
 "login_page/backend/application/" contains all the relevant backend code with some references from "__ init__.py" to "config.py" for configuring the Mongo database.
 
-## Angular Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Angular Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Angular Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Angular Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Angular Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Angular Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.

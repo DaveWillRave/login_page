@@ -11,13 +11,13 @@ An Angular, Flask API and MongoDB application for logging in and registering use
 + Authguard - Restricts users accessing directories without login credentials.
 
 ## Requirements
-+ Frontend - This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5. Angular Materials is used for designing login and homepage components along with Angular CDK library for additional features.
++ Frontend - This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.5. Angular Materials is used for designing login and homepage components along with Angular CDK library for additional features. NodeJs is also a requirement for npm commands.
 
 + Backend - Flask API version 1.1.2 is running on Python 3.8.6. MongoEngine is used by the Flask Api. MongoDB stores user login credentials, with users identified by their username and password. Bcrypt 3.2.0 library is used for encrypting user passwords before sending them into the database. Usernames are unique entries. Werkzeug version 0.16.1 is needed for compatibility with CORS package.
 
 ## Setup
 
-+ Angular Development server - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Use the command 'npm install' to install any requirements.
++ Angular Development server - Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files. Use the command `npm install` to install any requirements.
 + Flask API - To run the flask api install all the requirments using `pip install -r requirements.txt`
 Then simply run the command `python -m flask run`
 

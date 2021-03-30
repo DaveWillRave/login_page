@@ -8,12 +8,12 @@ Flask API version 1.1.2 is running on Python 3.8.6. MongoEngine is used by the F
 
 ## Feature list
 
-Login - Login allowing user to login with valid credentials. Login button only enabled if input fields have information.
-Registration - Registration pop-up with focus backdrop to allow registration of user if correct inputs applied to fields. Sign up button only enabled if input fields have valid                information. Pop-up can be closed by clicking on background.
-Homepage - Accessable only if a user is logged in and there is a valid token in memory. Displays the number of users already registered.
-Logout - Wipes the token from local memory and redirects user to login page.
-Interceptor - Adds HttpOptions to http requests. 
-Authguard - Restricts users accessing directories without login credentials.
++ Login - Login allowing user to login with valid credentials. Login button only enabled if input fields have information.
++ Registration - Registration pop-up with focus backdrop to allow registration of user if correct inputs applied to fields. Sign up button only enabled if input fields have valid                information. Pop-up can be closed by clicking on background.
++ Homepage - Accessable only if a user is logged in and there is a valid token in memory. Displays the number of users already registered.
++ Logout - Wipes the token from local memory and redirects user to login page.
++ Interceptor - Adds HttpOptions to http requests. 
++ Authguard - Restricts users accessing directories without login credentials.
 
 ## Relevant Frontend directories
 "login_page/frontend/src/app/" contains all the frontend code and with "/auth" containing the token interceptor code and auth guard code.

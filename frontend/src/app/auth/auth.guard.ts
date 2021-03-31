@@ -6,6 +6,7 @@ import {HomepageComponent} from '../homepage/homepage.component';
 
 
 @Injectable()
+// This guards the routes the user can access, and will only make them accessible if a valid token is provided.
 export class AuthGuardService implements CanActivate {
   constructor(
     private auth: AuthService,
@@ -13,6 +14,7 @@ export class AuthGuardService implements CanActivate {
     public dialog: MatDialog,
   ) {}
 
+  // This checks if the user token is valid. If not should redirect the user to the login page.
   canActivate(): boolean {
     try {
       if (!this.auth.isAuthenticated()) {

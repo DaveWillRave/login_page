@@ -20,13 +20,15 @@ import {UserService} from './user.service';
 import {AuthGuardService} from './auth/auth.guard';
 import {MatDialogModule} from '@angular/material/dialog';
 
-
+// All the components and modules are declared and describes how to compile the components, templates and injectors when the app is running.
 @NgModule({
+  // All components that are used by the app are declared here.
   declarations: [
     AppComponent,
     LoginComponent,
     HomepageComponent
   ],
+  // All imports most of which relate to the login GUI
   imports: [
     MatFormFieldModule,
     MatCardModule,
@@ -41,13 +43,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     HttpClientModule,
     ReactiveFormsModule,
     MatDialogModule
-
-
   ],
+  // All the services made available to the injectors for fetching user data, tokens and verifying if user has access.
  providers: [
    AuthService,
    UserService,
    AuthGuardService,
+   // This a unique service that interrupts http requests and implements the TokenInterceptor class before sending a request.
    {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
@@ -56,4 +58,5 @@ import {MatDialogModule} from '@angular/material/dialog';
   ],
   bootstrap: [AppComponent]
 })
+//  Exports this entire file as app module and is used in main.ts for the browser to interpret.
 export class AppModule { }

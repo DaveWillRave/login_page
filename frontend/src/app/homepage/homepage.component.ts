@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {UserService} from '../user.service';
-// import { AuthService } from '../user.service';
-import {FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 
-
+// Using the angular decorator once again sets the homepage meta data.
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent implements OnInit {
-  form: FormGroup;
   usernames;
   constructor(
     public dialog: MatDialog,
@@ -22,6 +19,7 @@ export class HomepageComponent implements OnInit {
 
   ) {}
 
+  // On going to the homepage will do a get request to retrieve all the current users in the database and return a integer.
   ngOnInit(): void {
     const result = this.userService.getUsers()
       .subscribe(response => {
@@ -30,6 +28,7 @@ export class HomepageComponent implements OnInit {
     console.log(result);
   }
 
+  // A logout button which will remove the current user token on local storage and redirect to the login page.
   onClick(): void{
     localStorage.removeItem('token');
     this.router.navigate(['/login']);

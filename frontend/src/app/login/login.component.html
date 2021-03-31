@@ -1,4 +1,4 @@
-
+<!-- Setting up the initial login form for the user using flex-layout for easier implementation-->
 <div fxLayoutAlign="center center" fxFlexFill class="main-div" >
   <mat-card fxFlex="25">
     <mat-toolbar class="login-banner">Login</mat-toolbar>
@@ -18,7 +18,7 @@
       <button mat-raised-button ="button" (click)="openWithTemplate(ref)" type="button" color="primary" class="model is-active">
         Sign Up
       </button>
-
+<!-- Reusing the login code to generate a registration form that implements the overlay functionality-->
       <ng-template #ref>
         <div class="reg-div">
           <mat-card fxFlex="200">

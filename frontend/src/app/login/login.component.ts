@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   }
 
   /* Implements the sign up overlay which runs when the user clicks the sign up button. It pops out the registration from and focuses it.
-  Will deselect the form if the background is clicked.
+  Will deselect the form if the background is clicked. Function returns void and takes no parameters.
   */
   openWithTemplate(ref: any): void {
     const configs = new OverlayConfig({
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  // Will register a new user using registration form and values assigned from html input fields.
+  // Will register a new user by passing the registration form and values assigned from html input fields. Will Return a console log and/or redirect.
   onRegister(user): void {
     if (confirm(`Are you sure you want to register this user to the database?`)) {
       this.userService.userRegister(user)

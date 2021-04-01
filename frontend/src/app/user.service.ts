@@ -17,7 +17,7 @@ export class UserService {
     private http: HttpClient,
     public router: Router
   ) {}
-
+  // Passes user object into function and posts http request with the username in the url.
   userLogin(user): Observable<any> {
     console.log('http://127.0.0.1:5000/api', user);
     return this.http.post(

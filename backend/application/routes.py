@@ -46,25 +46,26 @@ class UserAll(Resource):
 
 @api.route("/api/<user_name>")
 class UserId(Resource):
-
-
     def post(self, user_name):
+        """
+        passes and instance of the
+        class UserID to post and username as a parameter
+        """
         try:
-
             if User.objects(username=user_name):
                 """ 
                 This loop should return a true or false based on 
                 the payload credentials. 
                 """
                 data = api.payload
-                # Checks the password hash against the hash stored in the database.
+                """ Checks the password hash against the hash stored in the database. """
                 if bcrypt.check_password_hash(User.objects(username=user_name)[0].password, data['password']):
-                    # If hashes match creates a token and return true to the frontend
+                    """If hashes match creates a token and return true to the frontend"""
                     token = create_access_token(identity=user_name)
                     print(token)
                     return jsonify({'response': 'Successful login!', 'login': True, 'token': token})
                 else:
-                    # Return login false if the hashes do not match.
+                    """Return login false if the hashes do not match."""
                     return jsonify({'response': 'Failed login!', 'login': False})
             else:
                 return jsonify({'response': 'Invalid user!', 'login': False})
@@ -72,7 +73,7 @@ class UserId(Resource):
             return jsonify({'response': 'An error has occurred', 'login': False})
 
     def get(self, user_name):
-        # Get user by their username
+        """Get user by their username"""
         return jsonify(User.objects.get(username=user_name))
 
 # Sets the route to verify the token stored on the frontend and return true.

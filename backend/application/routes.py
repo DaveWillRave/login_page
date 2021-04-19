@@ -1,11 +1,12 @@
-from flask import jsonify
+from flask import jsonify, make_response, Response, request, Flask
+import json
+import http.client
 from application.models import User
 from application import app, api, bcrypt
 from flask_restplus import Resource
 from flask_jwt_extended import jwt_required, create_access_token
 from flask_jwt_extended import get_jwt_identity
 import jwt
-
 import uuid
 
 """ 
@@ -14,9 +15,9 @@ import uuid
  models.py. 
  """
 
+
 @api.route("/api", "/api/")
 class UserAll(Resource):
-
     def get(self):
         """
         Gets all users in the database
@@ -25,7 +26,6 @@ class UserAll(Resource):
         return jsonify(User.objects.all())
 
     def post(self):
-
         """
         Try to post the user to the database
         otherwise return a negative response
@@ -35,13 +35,29 @@ class UserAll(Resource):
             Takes in a payload, encrypts the password using 
             the bycrypt library and saves it to the database
             """
-            userdata = api.payload
+            test = False
+
+            if api.payload is None:
+                test = True
+                userdata = request.form.to_dict()
+            else:
+                userdata = api.payload
+
             password = bcrypt.generate_password_hash(userdata["password"])
             User(password=password, username=userdata["username"]).save()
-            return jsonify({'response': 'The post has worked successfully'})
 
-        except Exception as e:
-            return jsonify({'response': 'The post request has encountered an error'})
+            if test:
+                User.objects(username=userdata["username"]).delete()
+                hashed_password = password.decode()
+                return make_response(
+                    jsonify({'response': 'The post has worked successfully', 'hashed_password': hashed_password}), 200)
+
+            return make_response(jsonify({'response': 'The post has worked successfully'}), 200)
+
+        except (AttributeError, TypeError):
+            # raise AssertionError('Input variables should be strings')
+            return make_response(jsonify({'response': 'The post request has encountered an error'}), 406)
+
 
 
 @api.route("/api/<user_name>")
@@ -62,22 +78,24 @@ class UserId(Resource):
                 if bcrypt.check_password_hash(User.objects(username=user_name)[0].password, data['password']):
                     """If hashes match creates a token and return true to the frontend"""
                     token = create_access_token(identity=user_name)
-                    print(token)
-                    return jsonify({'response': 'Successful login!', 'login': True, 'token': token})
+                    return make_response(jsonify({'response': 'Successful login!', 'login': True, 'token': token}), 200)
                 else:
                     """Return login false if the hashes do not match."""
-                    return jsonify({'response': 'Failed login!', 'login': False})
+                    return make_response(jsonify({'response': 'Failed login!', 'login': False}), 401)
             else:
-                return jsonify({'response': 'Invalid user!', 'login': False})
+                return make_response(jsonify({'response': 'Invalid user!', 'login': False}), 401)
         except:
-            return jsonify({'response': 'An error has occurred', 'login': False})
+            return make_response(jsonify({'response': 'An error has occurred', 'login': False}), 401)
 
     def get(self, user_name):
         """Get user by their username"""
-        return jsonify(User.objects.get(username=user_name))
+        try:
+            response = jsonify(User.objects.get(username=user_name))
+            return make_response(response, 200)
+        except Exception as e:
+            return make_response(jsonify({'status': 'failed', 'error': str(e)}), 400)
 
 # Sets the route to verify the token stored on the frontend and return true.
-@app.route('/auth', methods=['GET'])
 @jwt_required()
 def dashboard():
-    return jsonify({'response': 'User authenticated', 'token': True}), 200
+    return make_response(jsonify({'response': 'User authenticated', 'token': True}), 200)

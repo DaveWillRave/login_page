@@ -13,7 +13,6 @@ import {TemplatePortal} from '@angular/cdk/portal';
 
 // Exports the login components and runs the functions and constructors for this class upon running the app.
 export class LoginComponent implements OnInit {
-
   // Initialising the objects and variables for the login.
   loginform: FormGroup;
   registerform: FormGroup;
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
     private viewContainerRef: ViewContainerRef
   ) {
   }
-
+  loginformSubmitted = false;
   /* Implements the sign up overlay which runs when the user clicks the sign up button. It pops out the registration from and focuses it.
   Will deselect the form if the background is clicked. Function returns void and takes no parameters.
   */
@@ -67,13 +66,14 @@ export class LoginComponent implements OnInit {
   // On submission will send all the values assigned to the keys from the input fields and will user user.servces.ts to validate the credentials.
   onSubmit(user): void {
     let loginStatus;
-    console.log(this.userService.userLogin(user));
+    console.log('onSubmit');
+    // console.log(this.userService.userLogin(user));
     this.userService.userLogin(user)
       // lambda expression used to map the boolean response to loginStatus
       .subscribe(response => {
         // will return [object Object] instead of boolean of this is not done
         loginStatus = response.login;
-
+        this.loginformSubmitted = true;
         // Backend will return true or false based on data and this loop will either store the token backend will generate or will print false on console.
         if (loginStatus === true) {
           localStorage.setItem('token', response.token);
@@ -88,11 +88,13 @@ export class LoginComponent implements OnInit {
 
   // Will register a new user by passing the registration form and values assigned from html input fields. Will Return a console log and/or redirect.
   onRegister(user): void {
+    console.log('onRegister');
     if (confirm(`Are you sure you want to register this user to the database?`)) {
       this.userService.userRegister(user)
         .subscribe(() => {
           console.log(`Register: Success!`);
-          location.reload();
+          this.router.navigate([`/home`]);
+          // location.reload();
         });
     } else {
       console.log(`User was not registered to the database.`);

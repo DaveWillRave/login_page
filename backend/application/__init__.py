@@ -19,7 +19,7 @@ CORS(app)
 jwt = JWTManager(app)
 # Instance of db is declared for the mongo database.
 db = MongoEngine(app)
-# Iniializes the api
+# Initializes the api
 api.init_app(app)
 
 from application import routes

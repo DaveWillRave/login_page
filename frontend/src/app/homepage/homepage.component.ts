@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class HomepageComponent implements OnInit {
   usernames;
+  test = false;
   constructor(
     public dialog: MatDialog,
     private userService: UserService,
@@ -21,15 +22,17 @@ export class HomepageComponent implements OnInit {
 
   // On going to the homepage will do a get request to retrieve all the current users in the database and return a integer.
   ngOnInit(): void {
+
     const result = this.userService.getUsers()
       .subscribe(response => {
         this.usernames = response.length;
     });
-    console.log(result);
+    // console.log(result);
   }
 
   // A logout button which will remove the current user token on local storage and redirect to the login page.
   onClick(): void{
+    this.test = true;
     localStorage.removeItem('token');
     this.router.navigate(['/login']);
   }

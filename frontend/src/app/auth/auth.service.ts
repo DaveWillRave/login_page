@@ -18,7 +18,9 @@ export class AuthService {
   // Function for checking token validity.
   public isAuthenticated(): boolean {
     const token = this.user.getToken();
-    /* Check whether the token is expired and return
+    console.log('Using isAuthenticated');
+    /*
+      Check whether the token is expired and return
      true or false
      */
     return !this.jwtHelper.isTokenExpired(token);

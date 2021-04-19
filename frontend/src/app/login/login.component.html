@@ -11,11 +11,11 @@
       <mat-form-field>
         <input matInput type="password" placeholder="Password" formControlName="password">
       </mat-form-field>
-      <button mat-raised-button type="submit" [disabled]="!loginform.valid">Login</button>
+      <button mat-raised-button type="submit" class="login-btn" id="login-btn" [disabled]="!loginform.valid">Login</button>
         <div style="width:200px;overflow:auto">
           <pre></pre>
         </div>
-      <button mat-raised-button ="button" (click)="openWithTemplate(ref)" type="button" color="primary" class="model is-active">
+      <button mat-raised-button ="button" (click)="openWithTemplate(ref)" type="button" color="primary" id="overlay-active" class="model is-active">
         Sign Up
       </button>
 <!-- Reusing the login code to generate a registration form that implements the overlay functionality-->
@@ -40,7 +40,7 @@
               <mat-form-field>
                 <input matInput type="password" placeholder="Password" formControlName="password">
               </mat-form-field>
-              <button mat-raised-button type="submit" [disabled]="!registerform.valid">Register User</button>
+              <button mat-raised-button type="submit" id="register-btn" class="register-btn" [disabled]="!registerform.valid">Register User</button>
               <div style="width:300px;overflow:auto">
                 <pre></pre>
               </div>

@@ -4,12 +4,12 @@
   <mat-card fxFlex="25">
     <mat-toolbar class="login-banner">There are {{usernames}} registered users. </mat-toolbar>
 
-    <form (click) = onClick() fxLayoutAlign="stretch" fxLayout="column" class="login-form">
-      <button mat-raised-button >Logout</button>
+<!--    <form (click)=onClick() fxLayoutAlign="stretch" fxLayout="column" class="login-form">-->
+      <button mat-raised-button (click)="onClick()" type="submit" id="logout-btn">Logout</button>
       <div style="width:200px;overflow:auto">
         <pre></pre>
       </div>
-    </form>
+<!--    </form>-->
   </mat-card>
 </div>
 

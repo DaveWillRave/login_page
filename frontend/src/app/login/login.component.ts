@@ -93,7 +93,6 @@ export class LoginComponent implements OnInit {
       this.userService.userRegister(user)
         .subscribe(() => {
           console.log(`Register: Success!`);
-          this.router.navigate([`/home`]);
           // location.reload();
         });
     } else {
